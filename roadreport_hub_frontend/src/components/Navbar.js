@@ -4,7 +4,7 @@ import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 
 function Navbar({ user, onLogin, onLogout, onRegister }) {
-  const location = typeof useLocation === 'function' ? useLocation() : { pathname: '/' };
+  const location = useLocation();
   return (
     <nav className="navbar" aria-label="Main navigation">
       <div className="container navbar-content" tabIndex={0}>
@@ -43,11 +43,11 @@ function Navbar({ user, onLogin, onLogout, onRegister }) {
             Home
           </Link>
           <Link
-            to="/report"
+            to="/report-issue"
             className="btn"
             style={{
-              background: location.pathname === '/report' ? 'var(--base-light)' : 'transparent',
-              color: location.pathname === '/report' ? '#fff' : 'var(--base-light)',
+              background: location.pathname === '/report-issue' ? 'var(--base-light)' : 'transparent',
+              color: location.pathname === '/report-issue' ? '#fff' : 'var(--base-light)',
               border: '1.2px solid var(--base-light)',
               fontWeight: 500,
               marginRight: 4

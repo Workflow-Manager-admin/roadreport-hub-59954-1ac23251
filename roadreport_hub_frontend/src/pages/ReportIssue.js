@@ -3,7 +3,7 @@ import IssueForm from '../components/IssueForm';
 
 // PUBLIC_INTERFACE
 function ReportIssue() {
-  // These are local state copies, decoupled from App.js to maintain independent form state
+  // Local state for independent form control
   const [formState, setFormState] = useState({ type: "", description: "" });
   const [formPhotos, setFormPhotos] = useState([]);
   const [selectedLocation, setSelectedLocation] = useState(null);
@@ -19,38 +19,51 @@ function ReportIssue() {
     setFormPhotos(ps => ps.filter((_, i) => i !== idx));
   }
   function handleLocationDemo() {
-    // Provide a fake location for demo since no map is rendered here
     setSelectedLocation({ lat: 12.9716, lng: 77.5946 });
   }
   function handleSubmitIssue() {
-    // Just simulate submit for demo (reset form)
     setSubmitted(true);
     setFormState({ type: "", description: "" });
     setFormPhotos([]);
-    setTimeout(() => setSubmitted(false), 2400);
     setSelectedLocation(null);
+    setTimeout(() => setSubmitted(false), 2200);
   }
 
-  // Use dark layout and padding consistent with established theme
+  // Visually balance, add heading, use dark theme and accent, center form.
   return (
-    <div style={{
-      minHeight: '100vh',
-      background: 'var(--base-dark)',
-      color: 'var(--text-color)',
-      display: 'flex',
-      flexDirection: 'column',
-      alignItems: 'center',
-      paddingTop: 110,
-    }}>
+    <div
+      style={{
+        minHeight: '100vh',
+        background: 'var(--base-dark)',
+        color: 'var(--text-color)',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        paddingTop: 110,
+      }}
+    >
       <div className="container" style={{ maxWidth: 520, width: '100%', margin: '0 auto' }}>
-        <h1 className="title" style={{ fontSize: 36, marginBottom: 10, color: '#fff' }}>
+        <h1
+          className="title"
+          style={{
+            fontSize: 36,
+            marginTop: 0,
+            marginBottom: 10,
+            color: 'var(--accent)',
+            textAlign: 'center'
+          }}
+        >
           Report an Issue
         </h1>
-        <div className="description" style={{
-          color: 'var(--text-secondary)',
-          marginBottom: 28,
-          fontSize: 18,
-        }}>
+        <div
+          className="description"
+          style={{
+            color: 'var(--text-secondary)',
+            marginBottom: 28,
+            fontSize: 18,
+            textAlign: 'center'
+          }}
+        >
           Please fill out the form below to report a road issue. Fields marked <span style={{ color: '#ff4c4c' }}>*</span> are required.
         </div>
 
@@ -66,7 +79,14 @@ function ReportIssue() {
 
         <button
           className="btn btn-large"
-          style={{ marginTop: 20, background: 'var(--base-light)', color: '#fff', width: '100%' }}
+          style={{
+            marginTop: 18,
+            background: 'var(--base-light)',
+            color: '#fff',
+            width: '100%',
+            fontWeight: 600,
+            fontSize: '1.13em'
+          }}
           onClick={handleLocationDemo}
           type="button"
         >
@@ -78,11 +98,12 @@ function ReportIssue() {
             marginTop: 22,
             color: '#70ff97',
             fontWeight: 600,
-            fontSize: '1.15em',
+            fontSize: '1.1em',
             background: '#202c1a',
             border: "1.5px solid #38de51",
             borderRadius: 7,
-            padding: "10px"
+            padding: "10px",
+            textAlign: 'center'
           }}>
             Issue submitted!
           </div>

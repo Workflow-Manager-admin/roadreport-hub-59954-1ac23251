@@ -132,7 +132,7 @@ function App() {
         <main>
           <Routes>
             <Route
-              path="/report"
+              path="/report-issue"
               element={
                 <ReportIssue />
               }
