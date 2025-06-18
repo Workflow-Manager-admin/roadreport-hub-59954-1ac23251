@@ -1,7 +1,10 @@
 import React from 'react';
 
 // PUBLIC_INTERFACE
+import { Link, useLocation } from 'react-router-dom';
+
 function Navbar({ user, onLogin, onLogout, onRegister }) {
+  const location = typeof useLocation === 'function' ? useLocation() : { pathname: '/' };
   return (
     <nav className="navbar" aria-label="Main navigation">
       <div className="container navbar-content" tabIndex={0}>
@@ -24,9 +27,38 @@ function Navbar({ user, onLogin, onLogout, onRegister }) {
             RoadReport Hub
           </span>
         </div>
-        <div>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
+          <Link
+            to="/"
+            className="btn"
+            style={{
+              background: 'transparent',
+              color: (location.pathname === '/') ? 'var(--base-light)' : '#fff',
+              border: '1.2px solid var(--base-light)',
+              fontWeight: 500,
+              marginRight: 4
+            }}
+            tabIndex={0}
+          >
+            Home
+          </Link>
+          <Link
+            to="/report"
+            className="btn"
+            style={{
+              background: location.pathname === '/report' ? 'var(--base-light)' : 'transparent',
+              color: location.pathname === '/report' ? '#fff' : 'var(--base-light)',
+              border: '1.2px solid var(--base-light)',
+              fontWeight: 500,
+              marginRight: 4
+            }}
+            tabIndex={0}
+            aria-label="Report Issue page"
+          >
+            Report Issue
+          </Link>
           {user ? (
-            <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
+            <>
               <span className="user-badge" title="Logged-in user">{user.username}</span>
               <button
                 className="btn"
@@ -43,9 +75,9 @@ function Navbar({ user, onLogin, onLogout, onRegister }) {
               >
                 Logout
               </button>
-            </div>
+            </>
           ) : (
-            <div style={{ display: 'flex', gap: 8 }}>
+            <>
               <button
                 className="btn"
                 style={{
@@ -72,7 +104,7 @@ function Navbar({ user, onLogin, onLogout, onRegister }) {
               >
                 Register
               </button>
-            </div>
+            </>
           )}
         </div>
       </div>
