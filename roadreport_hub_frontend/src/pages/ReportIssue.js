@@ -3,8 +3,8 @@ import IssueForm from '../components/IssueForm';
 
 // PUBLIC_INTERFACE
 function ReportIssue() {
-  // Local state for independent form control
-  const [formState, setFormState] = useState({ type: "", description: "" });
+  // Local state for independent form control in this page
+  const [formState, setFormState] = useState({ type: '', description: '' });
   const [formPhotos, setFormPhotos] = useState([]);
   const [selectedLocation, setSelectedLocation] = useState(null);
   const [submitted, setSubmitted] = useState(false);
@@ -19,17 +19,18 @@ function ReportIssue() {
     setFormPhotos(ps => ps.filter((_, i) => i !== idx));
   }
   function handleLocationDemo() {
+    // Demo location: Bangalore center; in reality, would use a map or browser geolocation
     setSelectedLocation({ lat: 12.9716, lng: 77.5946 });
   }
   function handleSubmitIssue() {
     setSubmitted(true);
-    setFormState({ type: "", description: "" });
+    setFormState({ type: '', description: '' });
     setFormPhotos([]);
     setSelectedLocation(null);
-    setTimeout(() => setSubmitted(false), 2200);
+    setTimeout(() => setSubmitted(false), 2000);
   }
 
-  // Visually balance, add heading, use dark theme and accent, center form.
+  // The whole page has a dark theme (background and text from CSS variables and accent color as #ff0000)
   return (
     <div
       style={{
@@ -64,9 +65,9 @@ function ReportIssue() {
             textAlign: 'center'
           }}
         >
-          Please fill out the form below to report a road issue. Fields marked <span style={{ color: '#ff4c4c' }}>*</span> are required.
+          Please fill out the form below to report a road issue.<br />
+          Fields marked <span style={{ color: '#ff4c4c' }}>*</span> are required.
         </div>
-
         <IssueForm
           formState={formState}
           onChange={handleFormChange}
@@ -76,7 +77,6 @@ function ReportIssue() {
           onRemovePhoto={handleFormRemovePhoto}
           location={selectedLocation}
         />
-
         <button
           className="btn btn-large"
           style={{
@@ -92,7 +92,6 @@ function ReportIssue() {
         >
           Demo: Use My Location
         </button>
-
         {submitted &&
           <div style={{
             marginTop: 22,
